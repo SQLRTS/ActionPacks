@@ -1,4 +1,4 @@
-#Requires -Version 5.0
+﻿#Requires -Version 5.0
 
 $VerbosePreference = 'SilentlyContinue'
 
@@ -166,7 +166,7 @@ function GetLicenseCertificate(){
     Param(        
         [ref]$ServerName,
         [int]$ServerPort = 27000,
-        [string]$AddressType,
+        [string]$AddressType = 'WSL',
         [ref]$Certificate
     )
 
@@ -210,6 +210,9 @@ function StopLogging(){
     )
 
     try{
+        if($null -eq $LoggingID){
+            return
+        }
         [guid]$LogId =[System.Guid]::NewGuid()
         if([System.Guid]::TryParse($LoggingID,[ref]$LogId) -eq $false){
             return
@@ -221,4 +224,15 @@ function StopLogging(){
     catch{
         throw
     }
+}
+
+[scriptblock]$Script:ImportFunctions = {
+    Invoke-Expression $Using:function:StartCitrixSession.Ast.Extent.Text
+    Invoke-Expression $Using:function:CloseCitrixSession.Ast.Extent.Text
+    Invoke-Expression $Using:function:CheckCitrixServer.Ast.Extent.Text
+    Invoke-Expression $Using:function:StartCitrixSessionAdv.Ast.Extent.Text
+    Invoke-Expression $Using:function:GetLicenseLocation.Ast.Extent.Text
+    Invoke-Expression $Using:function:GetLicenseCertificate.Ast.Extent.Text
+    Invoke-Expression $Using:function:StartLogging.Ast.Extent.Text
+    Invoke-Expression $Using:function:StopLogging.Ast.Extent.Text
 }

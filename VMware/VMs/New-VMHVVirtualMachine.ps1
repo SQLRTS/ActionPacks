@@ -1,5 +1,5 @@
-#Requires -Version 5.0
-# Requires -Modules VMware.PowerCLI
+﻿#Requires -Version 5.0
+# Requires -Modules VMware.VimAutomation.Core
 
 <#
     .SYNOPSIS
@@ -16,17 +16,17 @@
         © ScriptRunner Software GmbH
 
     .COMPONENT
-        Requires Module VMware.PowerCLI
+        Requires Module VMware.VimAutomation.Core
 
     .LINK
         https://github.com/scriptrunner/ActionPacks/tree/master/VMware/VMs
 
     .Parameter VIServer
-        [sr-en] Specifies the IP address or the DNS name of the vSphere server to which you want to connect
-        [sr-de] IP Adresse oder DNS des VSphere Servers
+        [sr-en] IP address or the DNS name of the vSphere server to which you want to connect
+        [sr-de] IP Adresse oder DNS des vSphere Servers
 
     .Parameter VICredential
-        [sr-en] Specifies a PSCredential object that contains credentials for authenticating with the server
+        [sr-en] PSCredential object that contains credentials for authenticating with the server
         [sr-de] Benutzerkonto für die Ausführung
 
     .Parameter HostName
@@ -124,7 +124,6 @@ Param(
     [ValidateSet("e1000","Flexible","Vmxnet","EnhancedVmxnet","Vmxnet3")]
     [string]$NetworkAdapterType = "e1000",
     [string]$GuestId,
-    [ValidateSet("NonPersistent","Persistent")]
     [string]$OSCustomizationSpec,
     [string]$HardwareVersion,
     [string]$Location,
@@ -133,7 +132,7 @@ Param(
     [string]$VMSwapfilePolicy = "Inherit"
 )
 
-Import-Module VMware.PowerCLI
+Import-Module VMware.VimAutomation.Core
 
 try{
     [string[]]$Properties = @('Name','Id','NumCpu','CoresPerSocket','Notes','GuestId','MemoryGB','VMSwapfilePolicy','ProvisionedSpaceGB','Folder')
@@ -167,12 +166,14 @@ try{
         $folder = Get-Folder -Server $Script:vmServer -Name $Location -ErrorAction Stop
         $cmdArgs.Add('Location' ,$Folder)
     }
+    if($PSBoundParameters.ContainsKey('OSCustomizationSpec') -eq $true){
+        $spec = Get-OSCustomizationSpec -Name $OSCustomizationSpec -Server $Script:vmServer
+        $cmdArgs.Add('OSCustomizationSpec' ,$spec)
+    }
     $Script:machine = New-VM @cmdArgs
+
     if($PSBoundParameters.ContainsKey('GuestId') -eq $true){
         $null = Set-VM -Server $Script:vmServer -VM  $Script:machine -GuestId $GuestId -Confirm:$False -ErrorAction Stop
-    }
-    if($PSBoundParameters.ContainsKey('OSCustomizationSpec') -eq $true){
-        $null = Set-VM -Server $Script:vmServer -VM  $Script:machine -OSCustomizationSpec $OSCustomizationSpec -Confirm:$False -ErrorAction Stop
     }
     if($PSBoundParameters.ContainsKey('HardwareVersion') -eq $true){
         $null = Set-VM -Server $Script:vmServer -VM  $Script:machine -HardwareVersion $HardwareVersion -Confirm:$False -ErrorAction Stop

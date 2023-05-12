@@ -3,10 +3,15 @@ Use cases for managing vCenter/ESXi Server, Virtual Machines and more
 
 > Note: The use of the scripts requires the PowerShell Module VMware.PowerCLI.
 
-## [Cluster](./Datacenter)
+## [Administration](./Administration)
+
++ Import/export auto deploy state
+
+## [Cluster](./Cluster)
 
 + Get/set a cluster
 + Add/move/remove a cluster
++ Add, get, set, move, remove datastore cluster
 
 ## [Datacenters](./Datacenter)
 
@@ -18,11 +23,12 @@ Use cases for managing vCenter/ESXi Server, Virtual Machines and more
 + Get/set a datastore
 + Add/remove a datastore
 
-## [Hard disks](./Disks)
+## [Disks](./Disks)
 
 + Get/set a hard disk
 + Add/copy/move/remove a hard disk
 + Add/get/set a SCSI controller
++ Add, get, set, copy, move, remove VDisk
 
 ## [Drives](./Drives)
 
@@ -65,6 +71,8 @@ Use cases for managing vCenter/ESXi Server, Virtual Machines and more
 + Get host disks
 + Get PCI devices
 + Get/add routes from the routing table
++ Get, install host patches
++ Get host profile required input
 
 ## [Network](./Network)
 
@@ -72,6 +80,10 @@ Use cases for managing vCenter/ESXi Server, Virtual Machines and more
 + Add/remove a virtual network adapter
 + Get virtual port groups
 + Get distributed switches
+
+## [Patches](./Patches)
+
++ Copy, get, sync patches
 
 ## [PowerCLI](./PowerCLI)
 
@@ -83,16 +95,26 @@ Use cases for managing vCenter/ESXi Server, Virtual Machines and more
 + Get/set a resource pool
 + Add/remove a resource pool
 
+## [Specifications](./Specifications)
+
++ New, get, set, copy, remove OS customization specifications
+
 ## [Tasks](./Tasks)
 
 + Get history tasks
 + Get/Stop a task
 
-## [Templates](./Template)
+## [Templates](./Templates)
 
 + Create a new virtual machine template
 + Convert/clone/register/remove a virtual machine template
 + Get/set a virtual machine template
+
+## [Tags](./Tags)
+
++ Get, set, new, remove tag category
++ Get, set, new, remove tag
++ Get, new, remove tag assignment
 
 ## [Virtual switches](./VirtualSwitch)
 
@@ -114,6 +136,7 @@ Use cases for managing vCenter/ESXi Server, Virtual Machines and more
 + Start/suspend/restart/stop a guest system
 + Run a script in the guest OS of a virtual machine
 + Get/set resource configuration
++ Copies guest system files and folders 
 
 ## [VMware Server](./Server)
 
@@ -123,6 +146,11 @@ Use cases for managing vCenter/ESXi Server, Virtual Machines and more
 + Get statistical informations
 + Exposes the ESXCLI functionality
 
+## [Reports](./_REPORTS_)
+
++ Report all available patches
++ Report all host patches
+
 ## [Queries](./_QUERY_)
 
 + Search host IDs or names
@@ -130,9 +158,10 @@ Use cases for managing vCenter/ESXi Server, Virtual Machines and more
 + Search virtual switches IDs or names
 + Search virtual machine IDs or names
 + Search disk IDs, paths or names
++ Search VDisks
 + Search running or queued tasks
 + Search available folders
-+ Search available network adapters
++ Search available network adapters, virtual networks
 + Search available host accounts
 + Search available host network adapters
 + Search available datastore IDs or names
@@ -143,5 +172,6 @@ Use cases for managing vCenter/ESXi Server, Virtual Machines and more
 + Search the names of then time zones available on the specified host
 + Search the names of the SCSI controllers
 + Search information about a host services
++ Search templates, clusters, datastore clusters
 
 ## [Library](./_LIB_)

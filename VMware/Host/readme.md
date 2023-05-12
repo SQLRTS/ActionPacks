@@ -63,6 +63,10 @@
 
   Retrieves the host network adapters on a vCenter Server system
 
++ [Get-VMHVHostPatch.ps1](./Get-VMHVHostPatch.ps1)
+
+  Retrieves the host patches installed on the specified host
+
 + [Get-VMHVHostPCIDevice.ps1](./Get-VMHVHostPCIDevice.ps1)
 
   Retrieves the PCI devices on the specified hosts
@@ -82,10 +86,18 @@
 + [Get-VMHVHostStorage.ps1](./Get-VMHVHostStorage.ps1)
 
   Retrieves the host storages on a vCenter Server system
+  
++ [Get-VMHVHostProfileRequiredInput.ps1](./Get-VMHVHostProfileRequiredInput.ps1)
+
+  Check whether the available information is sufficient to apply a host profile, and returns missing values
 
 + [Import-VMHVHostProfile.ps1](./Import-VMHVHostProfile.ps1)
 
   Imports a host profile from a file
+
++ [Install-VMHVHostPatch.ps1](./Install-VMHVHostPatch.ps1)
+
+  Updates the specified host
 
 + [Invoke-VMHVHostCommand.ps1](./Invoke-VMHVHostCommand.ps1)
 

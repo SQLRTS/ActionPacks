@@ -1,4 +1,4 @@
-﻿#Requires -Version 4.0
+﻿#Requires -Version 5.0
 #Requires -Modules ActiveDirectory
 
 <#
@@ -52,7 +52,7 @@
     
     .Parameter AuthType
         Specifies the authentication method to use
-        [sr-de] Gibt die zu verwendende Authentifizierungsmethode an#>
+        [sr-de] Gibt die zu verwendende Authentifizierungsmethode an
 #>
 
 param(
@@ -110,7 +110,7 @@ try{
                         Get-NestedGroupMember($itm)
                     }
                     else{ 
-                        $Script:resultMessage += [] @{Type = 'Group'; SAMAcccountName=$itm.SamAccountName;DistinguishedName=$itm.DistinguishedName}
+                        $Script:resultMessage += [PSCustomObject] @{Type = 'Group'; SAMAcccountName=$itm.SamAccountName;DistinguishedName=$itm.DistinguishedName}
                     }
                 }
                 elseif($itm.objectClass -eq "computer"){
